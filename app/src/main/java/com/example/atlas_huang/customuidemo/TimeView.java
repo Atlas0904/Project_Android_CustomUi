@@ -20,12 +20,15 @@ import java.util.Calendar;
 public class TimeView extends TextView {
 
     private static final String TAG = TimeView.class.getSimpleName();
-    private String titleText;
-    private boolean color;
     private String title;
+    private boolean color;
 
     public TimeView(Context context) {
         super(context);
+    }
+
+    public TimeView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
     }
 
     public TimeView(Context context, AttributeSet attrs) {
@@ -40,6 +43,7 @@ public class TimeView extends TextView {
         typedArray.recycle();
     }
 
+
     private void setTimeViewAttributes(TypedArray typedArray) {
         int count = typedArray.getIndexCount();
         try{
@@ -48,8 +52,8 @@ public class TimeView extends TextView {
 
                 // Handle xml user defined attributes
                 if (attr == R.styleable.TimeView_title) {
-                    titleText = typedArray.getString(attr);
-                    setText("["+ time() +"]" + " Get custom title from xml:" + titleText);
+                    title = typedArray.getString(attr);
+                    setText("["+ time() +"]" + " Get custom title from xml:" + title);
 
                 } else if(attr == R.styleable.TimeView_setColor) {
                     color = typedArray.getBoolean(attr, false);
@@ -61,9 +65,6 @@ public class TimeView extends TextView {
         }
     }
 
-    public TimeView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
 
     @TargetApi(Build.VERSION_CODES.N)
     private String time() {
